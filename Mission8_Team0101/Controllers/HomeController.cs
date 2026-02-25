@@ -8,7 +8,8 @@ public class HomeController : Controller
 {
     private IHabitRepository _repo; // Abstracted the context file, best practice. Wrapped in a box, can't see it in the class. Industry Standard.
 
-    public HomeController(IHabitRepository temp)
+    // Passes the instance of the context file to the class so that it can be used within the class.
+    public HomeController(IHabitRepository temp) 
     {
         _repo = temp;
     }
