@@ -6,9 +6,9 @@ namespace Mission8_Team0101.Controllers;
 
 public class HomeController : Controller
 {
-    private IHabit _repo; // Abstracted the context file, best practice. Wrapped in a box, can't see it in the class. Industry Standard.
+    private IHabitRepository _repo; // Abstracted the context file, best practice. Wrapped in a box, can't see it in the class. Industry Standard.
 
-    public HomeController(IHabit temp)
+    public HomeController(IHabitRepository temp)
     {
         _repo = temp;
     }
