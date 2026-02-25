@@ -24,8 +24,8 @@ public class Task
     public string TaskName { get; set; } = string.Empty; // Required
     public DateTime? DueDate { get; set; }
     public int QuadrantId { get; set; }           // Required FK
-    public Quadrant Quadrant { get; set; } = null!;
+    public Quadrant? Quadrant { get; set; }
     public int CategoryId { get; set; }           // Required FK
-    public Category Category { get; set; } = null!;
+    public Category? Category { get; set; }
     public bool Completed { get; set; } = false;
 }

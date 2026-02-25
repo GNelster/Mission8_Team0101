@@ -22,6 +22,14 @@ public class TaskContext : DbContext
             new Category { Id = 4, Name = "Church" }
         );
 
+        // Seed Quadrant options (Steven Covey Time Management Matrix)
+        modelBuilder.Entity<Quadrant>().HasData(
+            new Quadrant { Id = 1, Name = "Q1 - Urgent & Important" },
+            new Quadrant { Id = 2, Name = "Q2 - Not Urgent & Important" },
+            new Quadrant { Id = 3, Name = "Q3 - Urgent & Not Important" },
+            new Quadrant { Id = 4, Name = "Q4 - Not Urgent & Not Important" }
+        );
+
         // Enforce required fields
         modelBuilder.Entity<Task>()
             .Property(t => t.TaskName).IsRequired();
