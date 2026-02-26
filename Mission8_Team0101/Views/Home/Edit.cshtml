@@ -1,0 +1,51 @@
+@model Mission8_Team0101.Models.Task
+
+@{
+    ViewData["Title"] = "Edit Task";
+}
+
+<div class="container mt-4">
+    <h1>Edit Task</h1>
+
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+        
+        <div class="mb-3">
+            <label asp-for="TaskName" class="form-label">Task Name</label>
+            <input asp-for="TaskName" class="form-control" />
+            <span asp-validation-for="TaskName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DueDate" class="form-label">Due Date</label>
+            <input asp-for="DueDate" type="date" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="QuadrantId" class="form-label">Quadrant</label>
+            <select asp-for="QuadrantId" class="form-select">
+                <option value="">Select Quadrant</option>
+                @foreach (var q in ViewBag.Quadrants)
+                {
+                    <option value="@q.Id" selected="@(q.Id == Model.QuadrantId)">@q.Name</option>
+                }
+            </select>
+            <span asp-validation-for="QuadrantId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CategoryId" class="form-label">Category</label>
+            <select asp-for="CategoryId" class="form-select">
+                <option value="">Select Category</option>
+                @foreach (var c in ViewBag.Categories)
+                {
+                    <option value="@c.Id" selected="@(c.Id == Model.CategoryId)">@c.Name</option>
+                }
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

@@ -1,8 +1,183 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@model IEnumerable<Mission8_Team0101.Models.Task>
+
+@{
+    ViewData["Title"] = "Task Matrix";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Steven Covey Time Management Matrix</h1>
+
+    <div class="row">
+        <!-- Q1: Urgent & Important -->
+        <div class="col-md-6 mb-3">
+            <div class="card border-danger h-100">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0">Q1 - Urgent & Important</h5>
+                    <small>Do First</small>
+                </div>
+                <div class="card-body">
+                    @{
+                        var q1Tasks = Model.Where(t => t.QuadrantId == 1).ToList();
+                    }
+                    @if (q1Tasks.Any())
+                    {
+                        <ul class="list-group">
+                            @foreach (var task in q1Tasks)
+                            {
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>
+                                        <strong>@task.TaskName</strong>
+                                        @if (task.DueDate.HasValue)
+                                        {
+                                            <br><small class="text-muted">Due: @task.DueDate.Value.ToShortDateString()</small>
+                                        }
+                                    </span>
+                                    <div>
+                                        <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-sm btn-outline-primary">Edit</a>
+                                        <a asp-action="Delete" asp-route-id="@task.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                                        <form asp-action="MarkComplete" asp-route-id="@task.Id" method="post" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-outline-success">✓</button>
+                                        </form>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No tasks</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Q2: Not Urgent & Important -->
+        <div class="col-md-6 mb-3">
+            <div class="card border-primary h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Q2 - Not Urgent & Important</h5>
+                    <small>Schedule</small>
+                </div>
+                <div class="card-body">
+                    @{
+                        var q2Tasks = Model.Where(t => t.QuadrantId == 2).ToList();
+                    }
+                    @if (q2Tasks.Any())
+                    {
+                        <ul class="list-group">
+                            @foreach (var task in q2Tasks)
+                            {
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>
+                                        <strong>@task.TaskName</strong>
+                                        @if (task.DueDate.HasValue)
+                                        {
+                                            <br><small class="text-muted">Due: @task.DueDate.Value.ToShortDateString()</small>
+                                        }
+                                    </span>
+                                    <div>
+                                        <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-sm btn-outline-primary">Edit</a>
+                                        <a asp-action="Delete" asp-route-id="@task.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                                        <form asp-action="MarkComplete" asp-route-id="@task.Id" method="post" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-outline-success">✓</button>
+                                        </form>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No tasks</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Q3: Urgent & Not Important -->
+        <div class="col-md-6 mb-3">
+            <div class="card border-warning h-100">
+                <div class="card-header bg-warning">
+                    <h5 class="mb-0">Q3 - Urgent & Not Important</h5>
+                    <small>Delegate</small>
+                </div>
+                <div class="card-body">
+                    @{
+                        var q3Tasks = Model.Where(t => t.QuadrantId == 3).ToList();
+                    }
+                    @if (q3Tasks.Any())
+                    {
+                        <ul class="list-group">
+                            @foreach (var task in q3Tasks)
+                            {
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>
+                                        <strong>@task.TaskName</strong>
+                                        @if (task.DueDate.HasValue)
+                                        {
+                                            <br><small class="text-muted">Due: @task.DueDate.Value.ToShortDateString()</small>
+                                        }
+                                    </span>
+                                    <div>
+                                        <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-sm btn-outline-primary">Edit</a>
+                                        <a asp-action="Delete" asp-route-id="@task.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                                        <form asp-action="MarkComplete" asp-route-id="@task.Id" method="post" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-outline-success">✓</button>
+                                        </form>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No tasks</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Q4: Not Urgent & Not Important -->
+        <div class="col-md-6 mb-3">
+            <div class="card border-secondary h-100">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">Q4 - Not Urgent & Not Important</h5>
+                    <small>Eliminate</small>
+                </div>
+                <div class="card-body">
+                    @{
+                        var q4Tasks = Model.Where(t => t.QuadrantId == 4).ToList();
+                    }
+                    @if (q4Tasks.Any())
+                    {
+                        <ul class="list-group">
+                            @foreach (var task in q4Tasks)
+                            {
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>
+                                        <strong>@task.TaskName</strong>
+                                        @if (task.DueDate.HasValue)
+                                        {
+                                            <br><small class="text-muted">Due: @task.DueDate.Value.ToShortDateString()</small>
+                                        }
+                                    </span>
+                                    <div>
+                                        <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-sm btn-outline-primary">Edit</a>
+                                        <a asp-action="Delete" asp-route-id="@task.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                                        <form asp-action="MarkComplete" asp-route-id="@task.Id" method="post" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-outline-success">✓</button>
+                                        </form>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No tasks</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
